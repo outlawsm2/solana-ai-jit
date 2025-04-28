@@ -1,0 +1,10 @@
+// Watches for new AI coin pools on Raydium  
+fn snipe_ai_launch() {  
+    let new_pools = fetch_new_pools("AI"); // Filters for AI category  
+    for pool in new_pools {  
+        if is_stealable(&pool) {  
+            let jit_tx = build_jit_tx(pool);  
+            submit_at_slot_start(jit_tx); // Submits at next slot  
+        }  
+    }  
+}  
